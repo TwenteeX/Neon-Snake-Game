@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "Press Start 2P", "Courier New", Courier, monospace;
+}
+
+@layer utilities {
+  .glitch-text {
+    text-shadow: 
+      2px 2px 0px #FF00FF,
+      -2px -2px 0px #00FFFF;
+    animation: glitch-skew 1.5s infinite linear alternate-reverse;
+  }
+
+  .glitch-text-heavy {
+    text-shadow: 
+      4px 4px 0px #FF00FF,
+      -4px -4px 0px #00FFFF;
+    animation: glitch-skew-heavy 0.2s infinite linear alternate-reverse;
+  }
+
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 50;
+    position: absolute;
+    pointer-events: none;
+    background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,255,0.2) 50%, rgba(0,0,0,0) 100%);
+    opacity: 0.5;
+    animation: scanline 6s linear infinite;
+  }
+
+  .static-noise {
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    animation: noise 0.2s infinite;
+  }
+
+  .crt-overlay {
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  10% { transform: skew(-2deg); }
+  20% { transform: skew(2deg); }
+  30% { transform: skew(0deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-skew-heavy {
+  0% { transform: skew(0deg) translate(0); }
+  20% { transform: skew(-5deg) translate(-2px, 2px); }
+  40% { transform: skew(5deg) translate(2px, -2px); }
+  60% { transform: skew(-2deg) translate(-2px, -2px); }
+  80% { transform: skew(2deg) translate(2px, 2px); }
+  100% { transform: skew(0deg) translate(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
